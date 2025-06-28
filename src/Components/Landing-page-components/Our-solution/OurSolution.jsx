@@ -84,12 +84,6 @@ const OurSolution = () => {
             </div>
           ))}
         </div>
-
-        {/* Decorative elements */}
-        <div className="absolute top-20 left-10 w-2 h-2 bg-blue-400 rounded-full animate-ping opacity-30"></div>
-        <div className="absolute bottom-20 right-10 w-3 h-3 bg-green-400 rounded-full animate-ping opacity-30 delay-1000"></div>
-        <div className="absolute top-1/2 left-1/4 w-1 h-1 bg-orange-400 rounded-full animate-ping opacity-30 delay-500"></div>
-        <div className="absolute bottom-1/3 right-1/3 w-2 h-2 bg-pink-400 rounded-full animate-ping opacity-30 delay-1500"></div>
       </div>
     </div>
   );

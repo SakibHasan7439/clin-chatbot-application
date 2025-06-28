@@ -2,6 +2,7 @@ import AboutSection from './Components/Landing-page-components/About-section/Abo
 import HeroSection from './Components/Landing-page-components/Hero-section/HeroSection'
 import Navbar from './Components/Landing-page-components/Navbar/Navbar'
 import OurSolution from './Components/Landing-page-components/Our-solution/OurSolution'
+import SolutionAction from './Components/Landing-page-components/Solution-action/SolutionAction'
 
 function App() {
 
@@ -11,6 +12,7 @@ function App() {
         <HeroSection />
         <AboutSection />
         <OurSolution />
+        <SolutionAction />
     </div>
   )
 }
