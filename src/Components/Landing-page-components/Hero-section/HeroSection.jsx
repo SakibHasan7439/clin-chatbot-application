@@ -39,7 +39,7 @@ const HeroSection = () => {
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-blue-400 rounded-full animate-pulse delay-500"></div>
           </div>
         </div>
-
+        
         {/* Company Name */}
         <h1 className="text-2xl md:text-4xl font-bold text-blue-400 mb-8 tracking-wide">
           Clin Technologies

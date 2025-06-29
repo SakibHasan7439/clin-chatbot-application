@@ -12,6 +12,7 @@ const Login = () => {
         password: ''
     });
     
+    // eslint-disable-next-line no-unused-vars
     const { login, loading } = useAuth();
     const navigate = useNavigate();
     const location = useLocation();

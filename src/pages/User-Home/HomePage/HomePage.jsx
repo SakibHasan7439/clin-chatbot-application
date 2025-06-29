@@ -8,51 +8,57 @@ import {
   Wrench, 
   HelpCircle, 
   LogOut,
-  Paperclip,
-  Mic,
-  Send,
-  User
+  User,
+
 } from 'lucide-react';
+import { Link, Outlet } from 'react-router';
 import { useAuth } from '../../../Auth/AuthProvider';
 
 const HomePage = () => {
-  const {logout} = useAuth();
-  const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [message, setMessage] = useState('');
+const {logout} = useAuth();
+const [sidebarOpen, setSidebarOpen] = useState(true);
+// const [messages, setMessages] = useState([]);
+// const [chatId, setChatId] = useState(null);
 
-  const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
-  };
+const toggleSidebar = () => {
+  setSidebarOpen(!sidebarOpen);
+};
 
-  const handleSendMessage = () => {
-    if (message.trim()) {
-      // Handle message sending logic here
-      console.log('Sending message:', message);
-      setMessage('');
-    }
-  };
+const handleLogout = async() => {
+  console.log('Logout clicked');
+  await logout();
+};
 
-  const handleKeyPress = (e) => {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      handleSendMessage();
-    }
-  };
-
-  const handleLogout = async() =>{
-      await logout();
-  }
+// const startNewChat = async () => {
+//   // Clear current messages
+//   setMessages([]);
+  
+//   // Create a new chat session
+//   const newChatId = await createChat();
+//   if (newChatId) {
+//     console.log('Started new chat with ID:', newChatId);
+//   }
+// };
 
   return (
-    <div className="flex h-screen bg-slate-800 text-white">
+    <div className=" flex h-screen bg-slate-800 text-white">
       {/* Sidebar */}
-      <div className={`${sidebarOpen ? 'w-64' : 'w-0'} transition-all duration-300 bg-slate-900 overflow-hidden flex flex-col`}>
+      <div className={`${sidebarOpen ? 'w-64' : 'w-0'} transition-all duration-300 bg-[#374151] overflow-hidden flex flex-col`}>
         {/* Sidebar Header */}
+        <div className='py-6 border-b border-slate-600 px-4'>
+            <img src="/ai.png" alt="ai webpage logo" className='w-10 h-13' />
+        </div>
         <div className="p-4 border-b border-slate-700">
-          <button className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+          <Link to={"/homePage/chatInterface"}>
+            <button
+
+            className="w-full bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors"
+          >
             <Plus size={16} />
+           
             New Chat
           </button>
+          </Link>
         </div>
 
         {/* Sidebar Menu */}
@@ -68,41 +74,50 @@ const HomePage = () => {
               </div>
             </div>
             
-            <div className="flex items-center gap-3 p-2 hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
-              <Zap size={16} />
-              <span>Manage Subscript...</span>
-            </div>
+            <Link to={"/homePage/manageSubscription"}>
+              <div className="flex items-center gap-3 mb-3 p-2 hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+                <Zap size={16} />
+                <span>Manage Subscript...</span>
+              </div>
+            </Link>
             
-            <div className="flex items-center gap-3 p-2 hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+            <Link to={"/homePage/users"}>
+              <div className="flex items-center gap-3 p-2 mb-3 hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
               <Users size={16} />
               <span>Users</span>
             </div>
+            </Link>
             
-            <div className="flex items-center gap-3 p-2 hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+            <Link to={"/homePage/helpSupport"}>
+              <div className="flex items-center gap-3 p-2 mb-3 hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
               <Wrench size={16} />
               <span>Help And Support</span>
             </div>
+            </Link>
             
-            <div className="flex items-center gap-3 p-2 hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
+            <Link to={"/homePage/faq"}>
+              <div className="flex items-center gap-3 p-2 hover:bg-slate-800 rounded-lg cursor-pointer transition-colors">
               <HelpCircle size={16} />
               <span>FAQ</span>
             </div>
+            </Link>
           </nav>
         </div>
 
         {/* Sidebar Footer */}
         <div className="p-4 border-t border-slate-700">
-          <div onClick={handleLogout} className="flex items-center gap-3 p-2 hover:bg-slate-800 rounded-lg cursor-pointer transition-colors text-red-400">
+          <button onClick={handleLogout}  className="flex items-center gap-3 p-2 hover:bg-slate-800 rounded-lg cursor-pointer transition-colors text-red-400">
             <LogOut size={16} />
+            
             <span>Logout</span>
-          </div>
+          </button>
         </div>
       </div>
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col">
         {/* Header */}
-        <div className="bg-slate-800 mb-4 border-b border-slate-700 p-4 flex items-center justify-between">
+        <div className="bg-[#374151] mb-4 border-b border-slate-700 p-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button 
               onClick={toggleSidebar}
@@ -122,69 +137,7 @@ const HomePage = () => {
             </div>
           </div>
         </div>
-
-            {/* Tool Buttons */}
-          <div className="flex justify-center gap-2">
-            <button className="px-4 py-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors">
-              Chartwright
-            </button>
-            <button className="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors">
-              TranscriptX
-            </button>
-            <button className="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors">
-              Redactify
-            </button>
-            <button className="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-colors">
-              Validify
-            </button>
-          </div>
-
-        {/* Chat Area */}
-        <div className="flex-1 flex flex-col items-center justify-center p-8">
-          <div className="text-left max-w-md">
-            <h1 className="text-4xl font-bold text-blue-400 mb-2">Hello,</h1>
-            <p className="text-slate-400 text-lg">How Can I Help You Today</p>
-          </div>
-        </div>
-
-        {/* Message Input */}
-        <div className="p-4 border-t border-slate-700">
-          <div className="max-w-6xl mx-auto">
-            <div className="flex items-center gap-3 bg-slate-700 rounded-lg p-3">
-              <button className="p-2 hover:bg-slate-600 rounded-lg transition-colors">
-                <Paperclip size={20} className="text-slate-400" />
-              </button>
-              
-              <input
-                type="text"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-                onKeyPress={handleKeyPress}
-                placeholder="Type your message (Shift + Enter for new line)"
-                className="flex-1 bg-transparent text-white placeholder-slate-400 outline-none"
-              />
-              
-              <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1 text-xs text-slate-400">
-                  <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                  <span>0</span>
-                  <div className="w-2 h-2 bg-red-500 rounded-full"></div>
-                </div>
-                
-                <button className="p-2 hover:bg-slate-600 rounded-lg transition-colors">
-                  <Mic size={20} className="text-slate-400" />
-                </button>
-                
-                <button 
-                  onClick={handleSendMessage}
-                  className="p-2 bg-blue-600 hover:bg-blue-700 rounded-lg transition-colors"
-                >
-                  <Send size={20} />
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
+          <Outlet />
       </div>
     </div>
   );

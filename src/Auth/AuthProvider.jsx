@@ -8,6 +8,7 @@ export const AuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(null);
   const [refreshToken, setRefreshToken] = useState(null);
   const [loading, setLoading] = useState(true);
+   const [initialized, setInitialized] = useState(false);
 
   // Initialize auth state from localStorage on app load
   useEffect(() => {
@@ -17,25 +18,16 @@ export const AuthProvider = ({ children }) => {
         const storedRefreshToken = localStorage.getItem("refreshToken");
         const storedUser = localStorage.getItem("user");
 
-        console.log("Initializing auth:", { 
-          hasAccessToken: !!storedAccessToken, 
-          hasRefreshToken: !!storedRefreshToken,
-          hasUser: !!storedUser 
-        });
-
         if (storedAccessToken && storedUser) {
-          // Verify token is still valid (optional)
           const isValid = await verifyToken(storedAccessToken);
-          
+          console.log(isValid);
           if (isValid) {
             setAccessToken(storedAccessToken);
             setRefreshToken(storedRefreshToken);
             setUser(JSON.parse(storedUser));
-            console.log("Auth state restored from localStorage");
           } else {
             // Token is invalid, clear everything
             clearAuthData();
-            console.log("Invalid token, cleared auth data");
           }
         } else {
           console.log("No auth data found in localStorage");
@@ -45,6 +37,7 @@ export const AuthProvider = ({ children }) => {
         clearAuthData();
       } finally {
         setLoading(false);
+        setInitialized(true);
       }
     };
 
@@ -53,20 +46,25 @@ export const AuthProvider = ({ children }) => {
 
   // Verify token validity (optional - remove if you don't have this endpoint)
   const verifyToken = async (token) => {
-    try {
-      const response = await fetch('https://alibackend.duckdns.org/authentication_app/verify-token/', {
-        method: 'GET',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Content-Type': 'application/json',
-        },
-      });
-      return response.ok;
-    } catch (error) {
-      console.error("Token verification failed:", error);
-      return false;
-    }
-  };
+  try {
+    const response = await fetch('https://alibackend.duckdns.org/authentication_app/verify-token/', {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ token }),  // Send token in body
+    });
+
+    const data = await response.json();
+    console.log("Token verify response:", data);
+
+    return response.ok;
+  } catch (error) {
+    console.error("Token verification failed:", error);
+    return false;
+  }
+};
+
 
   // Clear all auth data
   const clearAuthData = () => {
@@ -200,6 +198,7 @@ export const AuthProvider = ({ children }) => {
     accessToken,
     refreshToken,
     loading,
+    initialized,
     isAuthenticated: !!user && !!accessToken,
     login,
     logout,
