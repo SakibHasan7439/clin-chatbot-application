@@ -1,4 +1,4 @@
-import React from 'react';
+import { Link } from "react-router";
 
 const HeroSection = () => {
   return (
@@ -41,13 +41,13 @@ const HeroSection = () => {
         </div>
 
         {/* Company Name */}
-        <h1 className="text-5xl md:text-7xl font-bold text-blue-400 mb-8 tracking-wide">
+        <h1 className="text-2xl md:text-4xl font-bold text-blue-400 mb-8 tracking-wide">
           Clin Technologies
         </h1>
 
         {/* Main Description */}
         <div className="max-w-5xl mx-auto mb-12">
-          <p className="text-lg md:text-[1.5rem] text-gray-300 leading-relaxed">
+          <p className="text-lg md:text-[1.4rem] text-gray-300 leading-relaxed">
             Revolutionizing clinical documentation through{' '}
             <span className="text-yellow-400 font-semibold">HIPAA COMPLIANT</span>{' '}
             advanced artificial intelligence, giving healthcare providers more time for what truly matters — patient care.{' '}
@@ -57,20 +57,24 @@ const HeroSection = () => {
         </div>
 
         {/* Sub Description */}
-        <div className="max-w-3xl mx-auto mb-12">
-          <p className="text-base md:text-lg lg:text-[1.2rem] text-gray-400 leading-relaxed">
+        <div className="max-w-2xl mx-auto mb-12">
+          <p className="text-base md:text-lg lg:text-[1.2rem] text-white leading-relaxed">
             Our sophisticated AI platform intelligently processes clinical conversations, creating accurate documentation that integrates with your existing EMR system.
           </p>
         </div>
 
         {/* Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 items-center">
-          <button className="px-8 py-3 border-2 border-blue-400 text-blue-400 rounded-full hover:bg-blue-400 hover:text-white transition-all duration-300 font-medium min-w-[120px]">
+          <Link to={"/login"}>
+            <button className="px-8 py-3 border-2 border-blue-400 text-blue-400 rounded-full hover:bg-blue-400 hover:text-white transition-all duration-300 font-medium min-w-[120px]">
             Login
           </button>
-          <button className="px-8 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all duration-300 font-medium shadow-lg shadow-blue-500/25 min-w-[120px]">
-            Signup
-          </button>
+          </Link>
+          <Link to={"/register"}>
+            <button className="px-8 py-3 cursor-pointer bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-all duration-300 font-medium shadow-lg shadow-blue-500/25 min-w-[120px]">
+              Signup
+            </button>
+          </Link>
         </div>
       </div>
 

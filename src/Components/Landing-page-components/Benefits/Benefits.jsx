@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export default function Benefits() {
   const benefits = [
     "Reduction in documentation time by 40-80%",
@@ -32,12 +34,16 @@ export default function Benefits() {
         
         {/* Call-to-Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <button className="px-8 py-3 border-2 border-[#3276f2] shadow-blue-400 text-gray-300 rounded-full hover:border-gray-500 hover:text-white transition-colors duration-200 min-w-[120px]">
-            Login
-          </button>
-          <button className="px-8 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors duration-200 min-w-[120px]">
-            Signup
-          </button>
+          <Link to={"/login"}>
+            <button className="px-8 py-3 border-2 border-[#3276f2] shadow-blue-400 text-gray-300 rounded-full hover:border-gray-500 hover:text-white transition-colors duration-200 min-w-[120px]">
+              Login
+            </button>
+          </Link>
+          <Link to={"/register"}>
+            <button className="px-8 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors duration-200 min-w-[120px]">
+              Signup
+            </button>
+          </Link>
         </div>
       </div>
     </div>

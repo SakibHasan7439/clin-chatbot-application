@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 export default function GetStarted() {
   return (
@@ -32,12 +33,16 @@ export default function GetStarted() {
           
           {/* Call-to-Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button className="px-8 py-3 border-2 border-blue-400 text-blue-400 rounded-full hover:border-blue-300 hover:text-blue-300 transition-colors duration-200 min-w-[120px]">
+            <Link to={"/login"}>
+              <button className="px-8 py-3 border-2 border-blue-400 text-blue-400 rounded-full hover:border-blue-300 hover:text-blue-300 transition-colors duration-200 min-w-[120px]">
               Login
-            </button>
-            <button className="px-8 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors duration-200 min-w-[120px]">
+              </button>
+            </Link>
+            <Link to={"/register"}>
+              <button className="px-8 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors duration-200 min-w-[120px]">
               Signup
             </button>
+            </Link>
           </div>
         </div>
       </div>

@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight, ChevronDown, ChevronUp } from 'lucide-react'
 const SolutionAction = () => {
   const [activeTab, setActiveTab] = useState('TranscriptX');
   const [currentExample, setCurrentExample] = useState(1);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isCollapsed, setIsCollapsed] = useState(true);
 
   const tabs = ['TranscriptX', 'Chartwright', 'Redactify', 'Validify'];
   const examples = [
